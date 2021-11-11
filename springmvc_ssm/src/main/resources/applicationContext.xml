@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <!--这个是spring的控制文件-->
+    <!--spring开启扫描组件（要把springMVC的排除）-->
+    <context:component-scan base-package="com.itheima">
+        <!--按照注解排除-->
+        <context:exclude-filter type="annotation" expression="org.springframework.web.bind.annotation.RestController"/>
+    </context:component-scan>
+
+
+    <!--注解式事务驱动(配上事务管理器名称)-->
+    <tx:annotation-driven transaction-manager="txManager"/>
+
+    <!--加载properties文件(类路径下的jdbc文件)-->
+    <context:property-placeholder location="classpath*:jdbc.properties"/>
+
+
+    <!--数据源-->
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
+        <property name="driverClassName" value="${jdbc.driver}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+    </bean>
+
+
+    <!--整合mybatis到spring中-->
+    <bean class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!--注入数据源和实体类包名-->
+        <property name="dataSource" ref="dataSource"/>
+        <property name="typeAliasesPackage" value="com.itheima.domain"/>
+        <!--分页插件-->
+        <!--
+        在SqlSessionFactoryBean中有setPlugins(Interceptor... plugins) {
+        其中的参数是拦截器
+        -->
+        <property name="plugins">
+            <array><!--大量的插件，用数组的形式-->
+                <bean class="com.github.pagehelper.PageInterceptor">
+                    <property name="properties">
+                        <props>
+                            <!--方言-->
+                            <prop key="helperDialect">mysql</prop>
+                            <!--合理化设置（第一页，最后一页的问题）-->
+                            <prop key="reasonable">true</prop>
+                        </props>
+                    </property>
+                </bean>
+            </array>
+        </property>
+
+    </bean>
+
+    <!--下面是mybatis相关-->
+    <!--下面是mybatis相关-->
+    <!--下面是mybatis相关-->
+    <!--映射扫描-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.itheima.dao"/>
+    </bean>
+
+    <!--事务管理器(使用jdbc的)-->
+    <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <!--注入数据源对象-->
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+</beans>

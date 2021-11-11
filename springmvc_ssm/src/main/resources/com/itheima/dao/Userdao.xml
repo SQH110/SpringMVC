@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--MyBatis的DTD约束-->
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.itheima.dao.Userdao">
+    <!--名称空间与dao或者mapper接口全类名相同-->
+
+    <!--添加-->
+    <insert id="save" parameterType="user">
+        INSERT INTO user(userName,password,realName,gender,birthday) VALUES (#{userName},#{password},#{realName},#{gender},#{birthday})
+    </insert>
+
+    <!--删除-->
+    <delete id="delete" parameterType="int">
+        DELETE FROM user WHERE uuid = #{uuid}
+    </delete>
+
+    <!--修改-->
+    <update id="update" parameterType="user">
+        UPDATE user SET userName=#{userName},password=#{password},realName=#{realName},gender=#{gender},birthday=#{birthday} where uuid=#{uuid}
+    </update>
+
+    <!--查询单个-->
+    <select id="get" resultType="user" parameterType="int" >/*id是int类型*/
+        select * from user WHERE uuid=#{uuid}
+    </select>
+
+    <!--分页查询（查询全部）-->
+    <select id="getAll" resultType="user">/*查询全部,resultType表示封装路径*/
+        select * from user
+    </select>
+
+    <!--登录-->
+    <select id="getByUserNameAndPassword" resultType="user" >
+        select * from user where userName=#{userName} and password=#{password}
+    </select>
+
+</mapper>
