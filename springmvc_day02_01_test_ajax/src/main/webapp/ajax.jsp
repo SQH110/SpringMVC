@@ -13,6 +13,7 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.3.1.min.js"></script>
 
 <script type="text/javascript">
+    //设置页面加载事件
     $(function () {
         //为id="testAjax"的组件绑定点击事件
         $("#testAjax").click(function(){
@@ -36,7 +37,7 @@
             $.ajax({
                type:"POST",
                url:"ajaxPojoToController",
-               data:'{"name":"Jock","age":39}',//键值对的形式
+               data:'{"name":"Jock","age":39}',//键值对的形式，json类型对象数据
                dataType:"text",
                contentType:"application/json",
             });
@@ -61,7 +62,7 @@
                type:"POST",
                url:"ajaxReturnString",
                //回调函数（页面上接收响应，使用回调函数）
-               success:function(data){
+               success:function(data){//data指服务端返回的数据
                     //打印返回结果
                     alert(data);
                }
@@ -108,7 +109,9 @@
                //回调函数
                success:function(data){
                    alert("跨域调用信息反馈："+data['name']+" , "+data['age']);
-                   /*里边是一个前台处理对象的模式，和处理返回单个pojo一样*/
+                   /*
+                    里边是一个处理前台返回数据是对象的模式，和之前不做跨域处理返回单个pojo数据一样的
+                   */
                }
             });
         });

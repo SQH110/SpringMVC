@@ -12,7 +12,7 @@ import java.util.Date;
 import java.util.List;
 
 @Controller
-@RequestMapping("/user")
+//@RequestMapping("/user") //请求映射类注解
 public class UserController {
     //方法传递普通类型参数，数量任意，类型必须匹配
     //http://localhost/requestParam1?name=itheima
@@ -26,7 +26,9 @@ public class UserController {
     //方法传递普通类型参数，使用@RequestParam参数匹配URL传参中的参数名称与方法形参名称
     //http://localhost/requestParam2?userName=Jock
     @RequestMapping("/requestParam2")
-    public String requestParam2(@RequestParam(value = "userName",required = true) String name){//true表示必须传参
+    public String requestParam2(@RequestParam(
+            value = "userName",
+            required = true) String name){//true表示必须传参
         System.out.println(name);
         return "page.jsp";
     }
@@ -68,7 +70,8 @@ public class UserController {
     //http://localhost/requestParam7?addresses[0].city=beijing&addresses[1].province=hebei
     @RequestMapping("/requestParam7")
     public String requestParam7(User user){
-        System.out.println(user.getAddresses());
+        System.out.println(user);
+        //User{name='null', age=null, address=null, nick=null, addresses=[Address{provice='null', city='beijing', address='null'}, Address{provice='hebei', city='null', address='null'}], addressMap=null}
         return "page.jsp";
     }
     //POJO中Map对象保存POJO的对象属性赋值，使用[key]的格式指定为Map中的对象属性赋值

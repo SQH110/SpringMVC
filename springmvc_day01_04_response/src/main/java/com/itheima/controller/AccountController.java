@@ -17,7 +17,7 @@ import java.util.List;
  */
 @Controller
 public class AccountController {
-    //使用原生response对象响应数据
+    //使用原生response对象响应数据（不推荐使用这个）
     @RequestMapping("/showData1")
     public void showData1(HttpServletResponse response) throws IOException {//尽量断开与servlet的关联
         response.getWriter().write("message");
@@ -33,8 +33,8 @@ public class AccountController {
         return "{'name':'Jock'}";
     }
 
-    //使用jackson进行json数据格式转化
-    @RequestMapping("/showData3")
+    //使用jackson工具进行json数据格式转化
+    @RequestMapping(value = "/showData3",produces = "application/json;charset=utf8")
     @ResponseBody
     public String showData3() throws JsonProcessingException {
         Book book  = new Book();
@@ -71,5 +71,6 @@ public class AccountController {
         al.add(book1);
         al.add(book2);
         return al;
+        //[{"name":"SpringMVC入门案例","price":66.66},{"name":"SpringMVC入门案例","price":66.66}]
     }
 }

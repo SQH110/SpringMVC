@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--注解驱动-->
+    <mvc:annotation-driven/>
+
+    <!--基础包的扫描-->
+    <context:component-scan base-package="com.itheima"/>
+
+    <!--配置文件上传处理器-->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!--
+        这个接口是springMVC中专门用于上传下载的组件，是个专用的东西，
+        id必须是multipartResolver
+        在DispatcherServlet中这个是被规定的
+        public static final String MULTIPART_RESOLVER_BEAN_NAME = "multipartResolver";
+        -->
+        <property name="maxUploadSize" value="1024000000"/><!--上传最大文件大小-->
+        <!--注入对应的属性-->
+        <!--提供“maxUploadSize”、“maxInMemorySize”和“defaultEncoding”设置作为 bean 属性（从CommonsFileUploadSupport继承）-->
+    </bean>
+
+</beans>
