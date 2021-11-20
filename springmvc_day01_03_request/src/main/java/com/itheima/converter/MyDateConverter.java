@@ -14,7 +14,7 @@ import java.util.Date;
 //本例中的泛型填写的是String，Date，最终出现字符串转日期时，该类型转换器生效
 public class MyDateConverter implements Converter<String, Date> {
     //重写接口的抽象方法，参数由泛型决定
-    public Date convert(String source) {
+    public Date convert(String source) {//转前是source，转后是date
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         Date date = null;
         //类型转换器无法预计使用过程中出现的异常，因此必须在类型转换器内部捕获，不允许抛出，框架无法预计此类异常如何处理

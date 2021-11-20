@@ -16,7 +16,8 @@ public class BookController {
     //使用原生request对象传递参数
     @RequestMapping("/showPageAndData1")
     public String showPageAndData1(HttpServletRequest request) {
-        request.setAttribute("name","itheima");//这里用了servlet的api，为降低耦合性，不常使用这个
+        request.setAttribute("name","itheima");
+        //这里用了servlet的api，为降低耦合性，不常使用这个
         /*
         setAttribute：在此请求中存储属性。
         在请求之间重置属性。 此方法最常与RequestDispatcher结合使用

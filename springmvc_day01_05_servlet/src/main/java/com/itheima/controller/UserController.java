@@ -18,7 +18,9 @@ public class UserController {
 
     //获取request,response,session对象的原生接口
     @RequestMapping("/servletApi")
-    public String servletApi(HttpServletRequest request, HttpServletResponse response, HttpSession session){
+    public String servletApi(HttpServletRequest request,
+                             HttpServletResponse response,
+                             HttpSession session){
         System.out.println(request);
         System.out.println(response);
         System.out.println(session);

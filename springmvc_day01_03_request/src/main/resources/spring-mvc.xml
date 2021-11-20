@@ -19,12 +19,13 @@
     <mvc:annotation-driven conversion-service="conversionService"/>
     <!--自定义格式化转换器-->
 <!--    <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">-->
-        <!--覆盖格式化转换器定义规则，该规则是一个set集合，对格式化转换器来说是追加和替换的思想，而不是覆盖整体格式化转换器-->
+<!--        覆盖格式化转换器定义规则，该规则是一个set集合（set的互异性），对格式化转换器来说是追加和替换的思想，而不是覆盖整体格式化转换器-->
 <!--        <property name="formatters">-->
-<!--            <set>&lt;!&ndash;set集合（互异性）&ndash;&gt;-->
-                <!--具体的日期格式化转换器-->
+            <!--set集合（互异性）-->
+<!--            <set>-->
+<!--                set集合中是具体的日期格式化转换器-->
 <!--                <bean class="org.springframework.format.datetime.DateFormatter">-->
-                    <!--具体的规则，不具有通用性，仅适用于当前的日期格式化转换器-->
+<!--                    具体的规则，不具有通用性，仅适用于当前的日期格式化转换器（因为set的互异性）-->
 <!--                    <property name="pattern" value="yyyy-MM-dd"/>-->
 <!--                </bean>-->
 <!--            </set>-->

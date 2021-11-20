@@ -30,8 +30,8 @@ public class ServletContainersInitConfig extends AbstractDispatcherServletInitia
      */
     @Override
     protected WebApplicationContext createServletApplicationContext() {
-        //新建web专用的上下文对象
-        AnnotationConfigWebApplicationContext ctx = new AnnotationConfigWebApplicationContext();
+        //新建web环境专用的上下文对象
+        AnnotationConfigWebApplicationContext ctx = new AnnotationConfigWebApplicationContext();//注解配置版
         ctx.register(SpringMVCConfiguration.class);//注册
         return ctx;
     }
@@ -51,7 +51,8 @@ public class ServletContainersInitConfig extends AbstractDispatcherServletInitia
     @Override
     public void onStartup(ServletContext servletContext) throws ServletException {//启动时做的事情
         super.onStartup(servletContext);
-        CharacterEncodingFilter cef = new CharacterEncodingFilter();
+        //在原始的功能上继续添加功能
+        CharacterEncodingFilter cef = new CharacterEncodingFilter();//new一个字符集过滤器对象
         cef.setEncoding("UTF-8");
         FilterRegistration.Dynamic registration = servletContext.addFilter("characterEncodingFilter", cef);//这个过滤器是固定的名称
         //下面是映射的位置

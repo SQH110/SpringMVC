@@ -89,12 +89,15 @@ public class AjaxController {
     标注在处理器方法上方表示该方法支持跨域访问
     标注在处理器类上方表示该处理器类中的所有处理器方法均支持跨域访问
 
+    内部应该就是更改了头信息，允许跨域访问
     *********************************************
     两个访问的requestURL是一样的，但是其来源不同，一个是从localhost/ajax.jsp
     一个是从www.jock.com/ajax.jsp访问的
+    显然对于从localhost/ajax.jsp访问的就是跨域了。
     */
     @CrossOrigin
     public User cross(HttpServletRequest request){//加入请求对象形参
+        //打印请求地址
         System.out.println("controller cross..."+request.getRequestURL());
         User user = new User();
         user.setName("Jockme");
