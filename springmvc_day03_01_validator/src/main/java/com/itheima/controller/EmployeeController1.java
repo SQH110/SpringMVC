@@ -37,16 +37,19 @@ public class EmployeeController1 {
             List<FieldError> fieldErrors = errors.getFieldErrors();//获取与字段相关的所有错误
             System.out.println(fieldErrors.size());//打印到拦截errors的数量
             for(FieldError error : fieldErrors) {
+                //这个fieldErrors的元素，就是一个字段及对应的消息
                 System.out.println(error.getField());//name，错误的field
                 System.out.println(error.getDefaultMessage());//姓名不能为空，错误对应的信息
                 System.out.println("------下一个-----");
                 /*
                 考虑把信息反馈出去，告知用户，利用一个形参model
+                比如：model中是name，"姓名不能为空"
+                那么对应页面的元素也要是name，才能接收
                  */
-                m.addAttribute(error.getField(), error.getDefaultMessage());
+                m.addAttribute(error.getField(), error.getDefaultMessage());//信息进入到model中
                 //addAttribute(在提供的名称下添加提供的属性
             }
-            return "addemployee.jsp";//当遇到问题的时候，回到原来的界面并且说明错误
+            return "addemployee.jsp";//当遇到问题的时候，不再跳转为success.jsp而是回到原来的界面并且说明错误
         }
         return "success.jsp";
     }

@@ -37,7 +37,7 @@ public class EmployeeController {
         //判定Errors对象中是否存在未通过校验的字段
         if(errors.hasErrors()){
             //获取所有未通过校验规则的信息
-            List<FieldError> fieldErrors = errors.getFieldErrors();
+            List<FieldError> fieldErrors = errors.getFieldErrors();//获取与字段相关的所有错误。
             System.out.println(fieldErrors.size());
             for(FieldError error : fieldErrors){
                 System.out.println(error.getField());
