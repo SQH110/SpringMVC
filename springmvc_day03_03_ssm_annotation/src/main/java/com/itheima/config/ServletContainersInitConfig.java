@@ -35,6 +35,14 @@ public class ServletContainersInitConfig extends AbstractDispatcherServletInitia
         ctx.register(SpringConfig.class);
         return ctx;
     }
+    /*
+    注意：
+        createServletApplicationContext()
+        createRootApplicationContext()
+        这两个方法怎么理解？
+        createServletApplicationContext()创建的是SpringMVC容器，而createRootApplicationContext()创建了Spring容器
+        SpringMVC是建立在Spring的基础上的，Spring是root是顶层容器
+     */
 
     //乱码处理作为过滤器，在servlet容器启动时进行配置，相关内容参看Servlet零配置相关课程
     @Override
